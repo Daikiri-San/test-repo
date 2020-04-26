@@ -1,0 +1,21 @@
+%main-button {
+  border-radius: 8px;
+  width: 140px;
+  margin-bottom: 20px;
+}
+
+%text-with-squere {
+  &:before {
+    display: inline-block;
+    background-color: $gray-900;
+    margin-right: 8px;
+    content: "";
+    width: 10px;
+    height: 10px;
+  }
+}
+
+%main-textarea {
+  resize: none;
+  border-radius: 8px;
+}

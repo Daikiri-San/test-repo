@@ -1,0 +1,40 @@
+.strings-list {
+  margin: 0 16px;
+
+  a > &__button {
+    @extend %main-button;
+    margin-bottom: 30px;
+  }
+
+  &__elements {
+    margin-bottom: 24px;
+  }
+
+  table > &__heading {
+    border-bottom: solid 1px $table-border-color;
+  }
+
+  &__body {
+    padding-top: 27px;
+  }
+
+  div > &__table {
+    margin-bottom: 0;
+
+    &--container {
+      max-width: 100%;
+      overflow-x: auto;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+  }
+}
+
+.table td,
+.table th {
+  text-align: center;
+}

@@ -1,0 +1,34 @@
+.search-form {
+  margin: 30px 16px;
+  border-bottom: solid 1px $main-font-color;
+
+  div &__button {
+    @extend %main-button;
+  }
+
+  div > &__select {
+    border-radius: 8px;
+    background-color: $main-inputs-color;
+    transition: background-color 0.2s ease;
+    padding-right: 4px;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $bg-color-semi-input;
+    }
+  }
+
+  div > &__input--text {
+    border-radius: 8px;
+  }
+
+  &__text {
+    padding-top: 12px;
+
+    &--squere {
+      padding-top: 12px;
+      @extend %text-with-squere;
+    }
+  }
+}

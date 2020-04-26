@@ -1,0 +1,27 @@
+.string-comment {
+  margin-bottom: 20px;
+  &__title {
+    display: inline-block;
+    margin: 0 0 20px 15px;
+  }
+
+  &__container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+
+  div &__button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transition: color 0.2s ease;
+  }
+
+  div > &__textarea {
+    @extend %main-textarea;
+  }
+
+  &__info {
+    @extend %text-with-squere;
+  }
+}

@@ -1,0 +1,7 @@
+.make-string {
+  margin: 30px 16px 24px;
+
+  div > &__button {
+    @extend %main-button;
+  }
+}

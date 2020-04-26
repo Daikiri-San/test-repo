@@ -1,0 +1,35 @@
+.string-translate {
+  margin-bottom: 34px;
+
+  &__info-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    &--text {
+      margin-bottom: 10px;
+    }
+    &--info-text {
+      @extend %text-with-squere;
+      margin-bottom: 10px;
+    }
+  }
+
+  div > &__textarea {
+    @extend %main-textarea;
+    margin-bottom: 12px;
+  }
+
+  &__text {
+    margin-bottom: 10px;
+  }
+
+  &__preview-content {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: $main-inputs-color;
+    width: 100%;
+    height: 70px;
+    overflow-y: auto;
+  }
+}
