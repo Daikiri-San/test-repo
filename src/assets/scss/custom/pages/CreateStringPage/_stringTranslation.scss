@@ -20,6 +20,17 @@
   div > &__textarea {
     @extend %main-textarea;
     margin-bottom: 12px;
+
+    // &--container {
+    //   width: 100%;
+    //   display: flex;
+    //   flex-wrap: nowrap;
+    //   max-height: 200px;
+    // }
+
+    // &--row-nub {
+    //   overflow-y: auto;
+    // }
   }
 
   &__text {

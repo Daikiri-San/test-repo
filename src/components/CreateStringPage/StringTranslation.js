@@ -63,4 +63,12 @@ const StringTranslation = ({ lang, id }) => {
   );
 };
 
+/* <ol className="string-translate__textarea--row-num">
+{Array(100)
+  .fill(" ")
+  .map((_, idx) => (
+    <li key={idx + 1}></li>
+  ))}
+</ol> */
+
 export default StringTranslation;
