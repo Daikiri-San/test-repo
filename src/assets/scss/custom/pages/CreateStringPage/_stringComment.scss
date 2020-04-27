@@ -3,11 +3,19 @@
   &__title {
     display: inline-block;
     margin: 10px 0 16px 16px;
+    font-weight: 500;
+    border-bottom: dashed 1px $blue;
+    transition: border-bottom 0.2s ease;
+
+    &:hover,
+    &:focus {
+      border-bottom: dashed 1px $body-bg;
+    }
   }
 
   &__container {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 
   div &__button {
@@ -19,9 +27,5 @@
 
   div > &__textarea {
     @extend %main-textarea;
-  }
-
-  &__info {
-    @extend %text-with-squere;
   }
 }

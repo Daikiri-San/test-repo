@@ -1,8 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Input, CustomInput } from "reactstrap";
 
+// const textareaInitialValue = <a href="/education/page/rules_8">  A new course<br> "8 Rules of Private Investor" is available</a>`;
+// const justForExample = `${indestructibleText(
+//   `<a href="/education/page/rules_8">`
+// )}A new course ${indestructibleText(
+//   `<br>`
+// )} "8 Rules of Private Investor" is available ${indestructibleText(`</a>`)}`;
+// const indestructibleText = (text) => {
+//   return <span className="indestractible-text">{text}</span>;
+// };
+
 const StringTranslation = ({ lang, id }) => {
-  const justForExample = ` <a href="/education/page/rules_8">  A new course<br> "8 Rules of Private Investor" is available</a>`;
+  const justForExample = `<a href="/education/page/rules_8">  A new course<br> "8 Rules of Private Investor" is available</a>`;
   const [textareaInput, setTextareaInput] = useState(justForExample);
   const [isEditingFree, setIsEditingFree] = useState(true);
   const convertedInCodeArea = useRef(null);
@@ -10,6 +20,8 @@ const StringTranslation = ({ lang, id }) => {
   const onChangeTextareaInput = (value) => setTextareaInput(value);
   const onChangeCheckbox = () => setIsEditingFree(!isEditingFree);
   const convertInHtml = () => {
+    console.dir(textareaInput);
+
     return (convertedInCodeArea.current.innerHTML = textareaInput);
   };
 
@@ -25,6 +37,7 @@ const StringTranslation = ({ lang, id }) => {
           Перевод на {lang} (изменено IvanIvanov 2020-03-15 23:50:23)
         </p>
         <CustomInput
+          className="string-translate__checkbox"
           checked={isEditingFree}
           onChange={() => onChangeCheckbox()}
           id={`free-editing-${id}`}

@@ -6,7 +6,9 @@ const MakeIdentifer = () => {
   const [identifier, setIdentifier] = useState("");
   const onChangeIdentifier = (value) => setIdentifier(value);
 
-  useEffect(() => onChangeIdentifier("<Идентификатор>"), [onChangeIdentifier]);
+  useEffect(() => onChangeIdentifier("mobile.wallet.description"), [
+    onChangeIdentifier,
+  ]);
 
   return (
     <div className="string-identifier">

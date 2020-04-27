@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -11,6 +11,7 @@ import {
 import routesPaths from "../../routesPaths";
 
 const StringsList = () => {
+  const table = useRef(null);
   const existStrings = useSelector(({ strings }) => strings.existStrings);
   const elements = `Элементы 1-6 из ${existStrings.length}`;
   const stringsPerPage = existStrings.slice(0, 6);
@@ -18,6 +19,7 @@ const StringsList = () => {
     existStrings.length / 6 <= 10
       ? Array(Math.ceil(existStrings.length / 6)).fill("el")
       : Array(10).fill("el");
+  console.dir(table);
   return (
     <div className="strings-list">
       <Link to={routesPaths.create_string}>
@@ -36,7 +38,7 @@ const StringsList = () => {
               <th>Имеющиеся переводы</th>
             </tr>
           </thead>
-          <tbody className="strings-list__body">
+          <tbody ref={table} className="strings-list__body">
             {stringsPerPage.map(({ id, identifier, string, hasTranslate }) => (
               <tr key={id}>
                 <td>{id}</td>
@@ -53,15 +55,25 @@ const StringsList = () => {
       </div>
       <Pagination className="strings-list__pagination">
         <PaginationItem>
-          <PaginationLink first href="#" />
+          <PaginationLink
+            className="strings-list__pagination--item"
+            first
+            href="#"
+          />
         </PaginationItem>
         {pages.map((_, idx) => (
           <PaginationItem key={idx}>
-            <PaginationLink href="#">{idx + 1}</PaginationLink>
+            <PaginationLink className="strings-list__pagination--item" href="#">
+              {idx + 1}
+            </PaginationLink>
           </PaginationItem>
         ))}
         <PaginationItem>
-          <PaginationLink last href="#" />
+          <PaginationLink
+            className="strings-list__pagination--item"
+            last
+            href="#"
+          />
         </PaginationItem>
       </Pagination>
     </div>

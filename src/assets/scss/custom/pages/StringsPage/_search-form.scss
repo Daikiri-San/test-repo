@@ -27,6 +27,7 @@
 
   div > &__input--text {
     border-radius: 8px;
+    font-weight: 500;
   }
 
   div > &__input--checkbox {
@@ -34,6 +35,8 @@
   }
 
   &__text {
-    padding-top: 12px;
+    color: $gray-900;
+    font-weight: 500;
+    padding-top: 9px;
   }
 }
