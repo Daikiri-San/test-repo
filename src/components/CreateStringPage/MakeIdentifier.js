@@ -1,51 +1,26 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { Input, Button } from "reactstrap";
+import React, { useState, useEffect } from "react";
+import { Button } from "reactstrap";
 
 const MakeIdentifer = () => {
-  const [textareaInput, setTextareaInput] = useState("Идентификатор");
-  const onChangeTextareaInput = (value) => setTextareaInput(value);
-  const [isTextareaOpen, setIsTextareaOpen] = useState(false);
-  const onApplyIdentifier = (value) => {
-    if (!value) {
-      setTextareaInput("Идентификатор");
-    }
-    setIsTextareaOpen(false);
-  };
-  const onOpenIdentifier = (e) => {
-    e.preventDefault();
-    setIsTextareaOpen(true);
-  };
+  const [identifier, setIdentifier] = useState("");
+  const onChangeIdentifier = (value) => setIdentifier(value);
+
+  useEffect(() => onChangeIdentifier("<Идентификатор>"), [onChangeIdentifier]);
+
   return (
     <div className="string-identifier">
-      {!isTextareaOpen ? (
-        <a
-          href="#"
-          className="string-comment__title"
-          onClick={onOpenIdentifier}
+      <p className="string-identifier__title">Идентификатор</p>
+      <div className="string-comment__container">
+        <div className="string-identifier__block">{identifier}</div>
+        <Button
+          className="string-comment__button"
+          color="link"
+          onClick={() => onChangeIdentifier(identifier)}
         >
-          {textareaInput}
-        </a>
-      ) : (
-        <div className="string-comment__container">
-          <Input
-            className="string-comment__textarea"
-            type="textarea"
-            name="comment-to-string"
-            id="comment-to-string"
-            value={textareaInput}
-            onChange={({ target: { value } }) => onChangeTextareaInput(value)}
-          />
-          <Button
-            className="string-comment__button"
-            color="link"
-            onClick={() => onApplyIdentifier(textareaInput)}
-          >
-            Применить
-          </Button>
-        </div>
-      )}
-      <p className="string-comment__info">Строка не требует перевода</p>
+          Применить
+        </Button>
+      </div>
     </div>
   );
 };

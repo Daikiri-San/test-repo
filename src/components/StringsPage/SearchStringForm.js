@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { Col, Button, Form, FormGroup, Input } from "reactstrap";
+import {
+  Col,
+  Button,
+  Form,
+  FormGroup,
+  Input,
+  CustomInput,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 
 const selectByOptions = [
   "Идентификатору",
@@ -29,12 +40,24 @@ const selectNeededTranslate = [
 const SearchStringForm = () => {
   const [textTypeInput, setTextTypeInput] = useState("");
   const [textLangInput, setTextLangInput] = useState("");
+  const [isTranslateNeeded, setIsTranslateNeeded] = useState(false);
+  const [isSearchByOpen, setIsSearchByOpen] = useState(false);
+  const [isSearchOnLangOpen, setIsSearchOnLangOpen] = useState(false);
+  const [isTranslateNeededOpen, setIsTranslateNeededOpen] = useState(false);
   const [selectTypeInput, setSelectTypeInput] = useState(selectByOptions[0]);
   const [selectLangInput, setSelectLangInput] = useState(selectStringLang[0]);
   const [selectLangToTranslate, setSelectLangToTranslate] = useState(
     selectNeededTranslate[0]
   );
 
+  const onChangeIsIsSearchByOpen = () =>
+    setIsSearchByOpen((prevState) => !prevState);
+  const onChangeIsSearchOnLangOpen = () =>
+    setIsSearchOnLangOpen((prevState) => !prevState);
+  const onChangeIsTranslateNeededOpen = () =>
+    setIsTranslateNeededOpen((prevState) => !prevState);
+
+  const onChangeCheckbox = () => setIsTranslateNeeded(!isTranslateNeeded);
   const onChangeTextTypeInput = (value) => setTextTypeInput(value);
   const onChangeTextLangInput = (value) => setTextLangInput(value);
   const onChangeSelectTypeInput = (value) => setSelectTypeInput(value);
@@ -44,13 +67,21 @@ const SearchStringForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isTranslateNeeded) {
+      console.log({
+        [selectTypeInput]: textTypeInput,
+        [selectLangInput]: textLangInput,
+      });
+      setTextTypeInput("");
+      return setTextLangInput("");
+    }
     console.log({
       [selectTypeInput]: textTypeInput,
       [selectLangInput]: textLangInput,
       needTranslate: selectLangToTranslate,
     });
     setTextTypeInput("");
-    setTextLangInput("");
+    return setTextLangInput("");
   };
   return (
     <div className="search-form">
@@ -59,23 +90,27 @@ const SearchStringForm = () => {
           <Col sm={8} md={3} lg={2}>
             <p className="search-form__text">Искать по:</p>
           </Col>
-          <Col sm={8} md={4} lg={3}>
-            <Input
-              className="search-form__select"
-              type="select"
-              value={selectTypeInput}
-              name="search-by"
-              id="search-by"
-              onChange={({ target: { value } }) =>
-                onChangeSelectTypeInput(value)
-              }
+          <Col sm={8} md={4} lg={3} className="search-form__select">
+            <ButtonDropdown
+              className="search-form__select--button"
+              isOpen={isSearchByOpen}
+              toggle={onChangeIsIsSearchByOpen}
             >
-              {selectByOptions.map((el) => (
-                <option key={el} className="search-form__select--option">
-                  {el}
-                </option>
-              ))}
-            </Input>
+              <DropdownToggle caret className="search-form__select--text">
+                {selectTypeInput}
+                <i className="fas fa-angle-down"></i>
+              </DropdownToggle>
+              <DropdownMenu className="search-form__select--menu">
+                {selectByOptions.map((el) => (
+                  <DropdownItem
+                    key={el}
+                    onClick={() => onChangeSelectTypeInput(el)}
+                  >
+                    {el}{" "}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </ButtonDropdown>
           </Col>
           <Col sm={8} md={4} lg={3}>
             <Input
@@ -90,25 +125,29 @@ const SearchStringForm = () => {
         </FormGroup>
         <FormGroup row>
           <Col sm={8} md={3} lg={2}>
-            <p className="search-form__text">строка на языке:</p>
+            <p className="search-form__text">Строка на языке:</p>
           </Col>
           <Col sm={8} md={4} lg={3}>
-            <Input
-              className="search-form__select"
-              type="select"
-              value={selectLangInput}
-              name="search-lang"
-              id="search-lang"
-              onChange={({ target: { value } }) =>
-                onChangeSelectLangInput(value)
-              }
+            <ButtonDropdown
+              className="search-form__select--button"
+              isOpen={isSearchOnLangOpen}
+              toggle={onChangeIsSearchOnLangOpen}
             >
-              {selectStringLang.map((el) => (
-                <option key={el} className="search-form__select--option">
-                  {el}
-                </option>
-              ))}
-            </Input>
+              <DropdownToggle caret className="search-form__select--text">
+                {selectLangInput}
+                <i className="fas fa-angle-down"></i>
+              </DropdownToggle>
+              <DropdownMenu className="search-form__select--menu">
+                {selectStringLang.map((el) => (
+                  <DropdownItem
+                    key={el}
+                    onClick={() => onChangeSelectLangInput(el)}
+                  >
+                    {el}{" "}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </ButtonDropdown>
           </Col>
           <Col sm={8} md={4} lg={3}>
             <Input
@@ -123,25 +162,36 @@ const SearchStringForm = () => {
         </FormGroup>
         <FormGroup row>
           <Col sm={8} md={4} lg={3}>
-            <p className="search-form__text--squere">Требуется перевод</p>
+            <CustomInput
+              className="search-form__input--checkbox"
+              checked={isTranslateNeeded}
+              onChange={() => onChangeCheckbox()}
+              id="search-isTranslateNeeded"
+              type="checkbox"
+              label="Требуется перевод"
+            />
           </Col>
           <Col sm={8} md={4} lg={3}>
-            <Input
-              className="search-form__select"
-              type="select"
-              value={selectLangToTranslate}
-              name="needed-translate"
-              id="needed-translate"
-              onChange={({ target: { value } }) =>
-                onChangeSelectLangToTranslate(value)
-              }
+            <ButtonDropdown
+              className="search-form__select--button"
+              isOpen={isTranslateNeededOpen}
+              toggle={onChangeIsTranslateNeededOpen}
             >
-              {selectNeededTranslate.map((el) => (
-                <option key={el} className="search-form__select--option">
-                  {el}
-                </option>
-              ))}
-            </Input>
+              <DropdownToggle caret className="search-form__select--text">
+                {selectLangToTranslate}
+                <i className="fas fa-angle-down"></i>
+              </DropdownToggle>
+              <DropdownMenu className="search-form__select--menu">
+                {selectNeededTranslate.map((el) => (
+                  <DropdownItem
+                    key={el}
+                    onClick={() => onChangeSelectLangToTranslate(el)}
+                  >
+                    {el}{" "}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </ButtonDropdown>
           </Col>
         </FormGroup>
         <FormGroup row>

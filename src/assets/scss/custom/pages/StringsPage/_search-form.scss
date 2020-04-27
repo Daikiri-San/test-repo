@@ -7,15 +7,21 @@
   }
 
   div > &__select {
-    border-radius: 8px;
-    background-color: $main-inputs-color;
-    transition: background-color 0.2s ease;
-    padding-right: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 
-    &:hover,
-    &:focus,
-    &:active {
-      background-color: $bg-color-semi-input;
+    &--text {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &--button {
+      width: 100%;
+    }
+
+    &--menu {
+      min-width: 100%;
     }
   }
 
@@ -23,12 +29,11 @@
     border-radius: 8px;
   }
 
+  div > &__input--checkbox {
+    padding-top: 9px;
+  }
+
   &__text {
     padding-top: 12px;
-
-    &--squere {
-      padding-top: 12px;
-      @extend %text-with-squere;
-    }
   }
 }

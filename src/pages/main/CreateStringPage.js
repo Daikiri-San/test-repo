@@ -18,8 +18,8 @@ function CreateStringPage() {
     <div className="make-string">
       <MakeComent />
       <MakeIdentifier />
-      <StringTranslation lang="Русский" />
-      <StringTranslation lang="Английский" />
+      <StringTranslation lang="Русский" id="ru" />
+      <StringTranslation lang="Английский" id="eng" />
       <Button className="make-string__button" color="primary">
         Сохранить
       </Button>

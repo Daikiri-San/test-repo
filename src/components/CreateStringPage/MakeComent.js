@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import { Input, Button } from "reactstrap";
+import { Input, Button, CustomInput } from "reactstrap";
 
 const MakeComent = () => {
   const [textareaInput, setTextareaInput] = useState("Комментарий");
   const [isTextareaOpen, setIsTextareaOpen] = useState(false);
+  const [isTranslateNeeded, setIsTranslateNeeded] = useState(true);
+
+  const onChangeCheckbox = () => setIsTranslateNeeded(!isTranslateNeeded);
   const onChangeTextareaInput = (value) => setTextareaInput(value);
   const onApplyComent = (value) => {
     if (!value) {
@@ -41,7 +44,13 @@ const MakeComent = () => {
           </Button>
         </div>
       )}
-      <p className="string-comment__info">Строка не требует перевода</p>
+      <CustomInput
+        checked={isTranslateNeeded}
+        onChange={() => onChangeCheckbox()}
+        id="create-comment-isTranslateNeeded"
+        type="checkbox"
+        label="Строка не требует перевода"
+      />
     </div>
   );
 };

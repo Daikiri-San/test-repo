@@ -1,13 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Input } from "reactstrap";
+import { Input, CustomInput } from "reactstrap";
 
-const StringTranslation = ({ lang }) => {
+const StringTranslation = ({ lang, id }) => {
   const justForExample = ` <a href="/education/page/rules_8">  A new course<br> "8 Rules of Private Investor" is available</a>`;
   const [textareaInput, setTextareaInput] = useState(justForExample);
-  const onChangeTextareaInput = (value) => setTextareaInput(value);
-
+  const [isEditingFree, setIsEditingFree] = useState(true);
   const convertedInCodeArea = useRef(null);
 
+  const onChangeTextareaInput = (value) => setTextareaInput(value);
+  const onChangeCheckbox = () => setIsEditingFree(!isEditingFree);
   const convertInHtml = () => {
     return (convertedInCodeArea.current.innerHTML = textareaInput);
   };
@@ -23,9 +24,13 @@ const StringTranslation = ({ lang }) => {
         <p className="string-translate__info-container--text">
           Перевод на {lang} (изменено IvanIvanov 2020-03-15 23:50:23)
         </p>
-        <p className="string-translate__info-container--info-text">
-          Свободное редактирование
-        </p>
+        <CustomInput
+          checked={isEditingFree}
+          onChange={() => onChangeCheckbox()}
+          id={`free-editing-${id}`}
+          type="checkbox"
+          label="Свободное редактирование"
+        />
       </div>
       <Input
         className="string-translate__textarea"
