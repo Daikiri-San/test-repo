@@ -45,15 +45,29 @@ const StringTranslation = ({ lang, id }) => {
           label="Свободное редактирование"
         />
       </div>
-      <Input
-        className="string-translate__textarea"
-        type="textarea"
-        rows="3"
-        name="comment-to-string"
-        id="comment-to-string"
-        value={textareaInput}
-        onChange={({ target: { value } }) => onChangeTextareaInput(value)}
-      />
+      <div className="string-translate__textarea--container">
+        <ul className="string-translate__textarea--row-num">
+          {Array(100)
+            .fill(" ")
+            .map((_, idx) => (
+              <li
+                key={idx + 1}
+                className="string-translate__textarea--row-item"
+              >
+                {idx + 1}
+              </li>
+            ))}
+        </ul>
+        <Input
+          className="string-translate__textarea"
+          type="textarea"
+          rows="3"
+          name="comment-to-string"
+          id="comment-to-string"
+          value={textareaInput}
+          onChange={({ target: { value } }) => onChangeTextareaInput(value)}
+        />
+      </div>
       <p className="string-translate__text">Предпросмотр</p>
       <div
         ref={convertedInCodeArea}
