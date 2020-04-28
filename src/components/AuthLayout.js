@@ -5,12 +5,13 @@ import { Route, Switch, useLocation, Redirect } from "react-router-dom";
 import { Container } from "reactstrap";
 import { mainPageRoutes } from "../routes";
 import routesPaths from "../routesPaths";
+import Spinner from "./SpinnerCustom";
 
 // code splitting and lazy loading
 // https://blog.logrocket.com/lazy-loading-components-in-react-16-6-6cea535c0b52
 const Topbar = React.lazy(() => import("./Topbar"));
 const Sidebar = React.lazy(() => import("./Sidebar"));
-const loading = () => <div className="text-center"></div>;
+const loading = () => <Spinner />;
 
 function AuthLayout() {
   const dispatch = useDispatch();

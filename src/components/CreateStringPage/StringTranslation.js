@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Input, CustomInput } from "reactstrap";
+import { CustomInput } from "reactstrap";
+import debounce from "lodash.debounce";
 
-// const textareaInitialValue = <a href="/education/page/rules_8">  A new course<br> "8 Rules of Private Investor" is available</a>`;
+// const textareaInitialValue = `<a href="/education/page/rules_8">  A new course<br> "8 Rules of Private Investor" is available</a>`;
 // const justForExample = `${indestructibleText(
 //   `<a href="/education/page/rules_8">`
 // )}A new course ${indestructibleText(
@@ -12,22 +13,67 @@ import { Input, CustomInput } from "reactstrap";
 // };
 
 const StringTranslation = ({ lang, id }) => {
-  const justForExample = `<a href="/education/page/rules_8">  A new course<br> "8 Rules of Private Investor" is available</a>`;
-  const [textareaInput, setTextareaInput] = useState(justForExample);
+  // const indestructibleText = (text) => {
+  //   return <span className="indestractible-text">{text}</span>;
+  // };
+  const justForExample = () => {
+    const container = document.createElement("div");
+    const indestractible = (text) => {
+      const newTag = document.createElement("span");
+      newTag.classList.add("indestractible-text");
+      newTag.insertAdjacentText("beforeend", text);
+      newTag.style.display = "inline-block";
+      newTag.setAttribute("contentEditable", false);
+      return container.insertAdjacentElement("beforeend", newTag);
+    };
+    const destractible = () => {
+      const newTag = document.createElement("p");
+      newTag.classList.add("destractible-text");
+      newTag.insertAdjacentText(
+        "beforeend",
+        " \xa0\xa0\xa0\xa0\xa0\xa0\xa0   "
+      );
+      newTag.style.display = "inline-block";
+      newTag.setAttribute("contentEditable", true);
+      return container.insertAdjacentElement("beforeend", newTag);
+    };
+    indestractible('  <a href="/education/page/rules_8">  ');
+    destractible();
+    indestractible("  <br>  ");
+    destractible();
+    indestractible("  </a>  ");
+    return container;
+  };
+
+  // const justForExample = `<a href="/education/page/rules_8">  A new course<br> "8 Rules of Private Investor" is available</a>`;
+  const [textareaInput, setTextareaInput] = useState("");
   const [isEditingFree, setIsEditingFree] = useState(true);
+  const customTextarea = useRef(null);
   const convertedInCodeArea = useRef(null);
 
-  const onChangeTextareaInput = (value) => setTextareaInput(value);
-  const onChangeCheckbox = () => setIsEditingFree(!isEditingFree);
-  const convertInHtml = () => {
-    console.dir(textareaInput);
-
-    return (convertedInCodeArea.current.innerHTML = textareaInput);
+  const onChangeTextarea = () => {
+    if (!customTextarea.current.textContent) {
+      return setTextareaInput("");
+    }
+    setTextareaInput(customTextarea.current.textContent);
   };
+  const onChangeCheckbox = () => setIsEditingFree(!isEditingFree);
+  const convertInHtml = () =>
+    (convertedInCodeArea.current.innerHTML = textareaInput);
+
+  useEffect(() => {
+    const example = justForExample();
+    const neededElements = [...example.children];
+    neededElements.forEach((el) =>
+      customTextarea.current.insertAdjacentElement("beforeend", el)
+    );
+    convertInHtml();
+    return () => (convertedInCodeArea.current.innerHTML = "");
+  }, []);
 
   useEffect(() => {
     convertInHtml();
-    return () => (convertedInCodeArea.current.innerHTML = "");
+    return;
   }, [textareaInput]);
 
   return (
@@ -58,14 +104,10 @@ const StringTranslation = ({ lang, id }) => {
               </li>
             ))}
         </ul>
-        <Input
+        <div
+          ref={customTextarea}
           className="string-translate__textarea"
-          type="textarea"
-          rows="3"
-          name="comment-to-string"
-          id="comment-to-string"
-          value={textareaInput}
-          onChange={({ target: { value } }) => onChangeTextareaInput(value)}
+          onKeyDown={debounce(() => onChangeTextarea(), 500)}
         />
       </div>
       <p className="string-translate__text">Предпросмотр</p>
