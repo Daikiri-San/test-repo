@@ -87,7 +87,7 @@ const SearchStringForm = () => {
     <div className="search-form">
       <Form>
         <FormGroup row>
-          <Col sm={8} md={3} lg={2}>
+          <Col sm={8} md={3}>
             <p className="search-form__text">Искать по:</p>
           </Col>
           <Col sm={8} md={4} lg={3} className="search-form__select">
@@ -124,7 +124,7 @@ const SearchStringForm = () => {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Col sm={8} md={3} lg={2}>
+          <Col sm={8} md={3}>
             <p className="search-form__text">Строка на языке:</p>
           </Col>
           <Col sm={8} md={4} lg={3}>
@@ -161,7 +161,7 @@ const SearchStringForm = () => {
           </Col>
         </FormGroup>
         <FormGroup row>
-          <Col sm={8} md={4} lg={3}>
+          <Col sm={8} md={3}>
             <CustomInput
               className="search-form__input--checkbox"
               checked={isTranslateNeeded}
@@ -200,12 +200,7 @@ const SearchStringForm = () => {
             md={{ size: 3, offset: 8 }}
             lg={{ size: 2, offset: 9 }}
           >
-            <Button
-              className="search-form__button"
-              type="submit"
-              color="primary"
-              onClick={handleSubmit}
-            >
+            <Button type="submit" color="primary" onClick={handleSubmit}>
               Найти
             </Button>
           </Col>

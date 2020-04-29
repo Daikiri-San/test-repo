@@ -20,9 +20,7 @@ function CreateStringPage() {
       <MakeIdentifier />
       <StringTranslation lang="Русский" id="ru" />
       <StringTranslation lang="Английский" id="eng" />
-      <Button className="make-string__button" color="primary">
-        Сохранить
-      </Button>
+      <Button color="primary">Сохранить</Button>
     </div>
   );
 }

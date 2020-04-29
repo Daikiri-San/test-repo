@@ -1,7 +1,5 @@
 .make-string {
-  margin: 30px 16px 24px;
-
-  div > &__button {
-    @extend %main-button;
-  }
+  padding: 30px 16px 24px;
+  border-radius: 0.25rem;
+  background-color: $bg-leftbar;
 }

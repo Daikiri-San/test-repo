@@ -1,10 +1,9 @@
 .search-form {
-  margin: 30px 16px;
+  padding: 40px 12px 0;
+  border-radius: 0.25rem;
+  background-color: $bg-leftbar;
+  margin-bottom: 30px;
   border-bottom: solid 1px $main-font-color;
-
-  div &__button {
-    @extend %main-button;
-  }
 
   div > &__select {
     display: flex;
@@ -18,6 +17,11 @@
     }
     &--button {
       width: 100%;
+      margin-bottom: 10px;
+
+      @media screen and (min-width: 48em) {
+        margin-bottom: 0;
+      }
     }
 
     &--menu {
@@ -32,6 +36,11 @@
 
   div > &__input--checkbox {
     padding-top: 9px;
+    margin-bottom: 10px;
+
+    @media screen and (min-width: 48em) {
+      margin-bottom: 0;
+    }
   }
 
   &__text {

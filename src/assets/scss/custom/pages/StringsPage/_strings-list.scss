@@ -1,8 +1,9 @@
 .strings-list {
-  margin: 0 16px;
+  padding: 20px 16px 0;
+  border-radius: 0.25rem;
+  background-color: $bg-leftbar;
 
   a > &__button {
-    @extend %main-button;
     margin-bottom: 30px;
   }
 
@@ -18,15 +19,6 @@
 
   &__body {
     padding-top: 27px;
-  }
-
-  div > &__table {
-    margin-bottom: 0;
-
-    &--container {
-      max-width: 100%;
-      overflow-x: auto;
-    }
   }
 
   &__pagination {

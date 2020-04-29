@@ -29,7 +29,7 @@ const StringsList = () => {
       </Link>
       <p className="strings-list__elements">{elements}</p>
       <div className="strings-list__table--container">
-        <Table className="strings-list__table" borderless>
+        <Table responsive borderless>
           <thead className="strings-list__heading">
             <tr>
               <th>ID</th>
@@ -46,7 +46,9 @@ const StringsList = () => {
                 <td>{string}</td>
                 <td>{hasTranslate.join(", ")}</td>
                 <td>
-                  <Link to={routesPaths.strings}>Редактировать</Link>
+                  <Link to={routesPaths.strings}>
+                    <i class="fas fa-edit"></i>
+                  </Link>
                 </td>
               </tr>
             ))}
